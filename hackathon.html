@@ -1,0 +1,878 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CareerGuide.in </title>
+    <script src="https://cdn.botpress.cloud/webchat/v3.2/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/08/29/09/20250829095821-MDRHHFRK.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-900: #ffff;
+            --bg-800: #f8fafc;
+            --glass: rgba(0, 0, 0, 0.04);
+            --muted-glass: rgba(0, 0, 0, 0.02);
+            --primary: #2563eb;
+            --primary-2: #1d4ed8;
+            --accent: #ffa200;
+            --text-0: #111827;
+            --text-1: #374151;
+            --muted: #6b7280;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            --radius-lg: 18px;
+            --radius-md: 12px;
+            --glass-blur: 10px;
+            --container: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html,
+        body {
+            height: 100%
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: #ffffff;
+            color: var(--text-0);
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            line-height: 1.5;
+            padding-bottom: 4rem;
+            cursor: none;
+        }
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            top: var(--y, 50%);
+            left: var(--x, 50%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        body::before {
+            width: 10px;
+            height: 10px;
+            background: var(--primary);
+            box-shadow: 0 0 12px var(--primary), 0 0 20px var(--primary-2);
+        }
+
+        body::after {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--primary-2);
+            opacity: 0.6;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.3);
+                opacity: 0.3;
+            }
+
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.6;
+            }
+        }
+
+        .container {
+            max-width: var(--container);
+            margin: 0 auto;
+            padding: 0 1.25rem
+        }
+
+        .navbar {
+            position: sticky;
+            top: 16px;
+            z-index: 50;
+            margin: 0 auto;
+            padding: 8px;
+            background: #ffffffee;
+            border-radius: 14px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 10px;
+        }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 18px
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 2rem;
+            color: var(--text-0);
+            letter-spacing: 0.2px
+        }
+
+        .logo span {
+            color: var(--accent);
+            margin-left: 1px;
+            font-weight: 700
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            list-style: none
+        }
+
+        .nav-link {
+            color: var(--muted);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 12px;
+            border-radius: 10px;
+            transition: all .22s
+        }
+
+        .nav-link:hover {
+            color: var(--text-0);
+            background: rgba(0, 0, 0, 0.05);
+            transform: translateY(-2px)
+        }
+
+        .hero {
+            padding: 4.25rem 0 3.5rem
+        }
+
+        .hero-inner {
+            display: grid;
+            grid-template-columns: 1fr 420px;
+            gap: 2rem;
+            align-items: center
+        }
+
+        .hero-copy h2 {
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: .5rem;
+            letter-spacing: 0.4px
+        }
+
+        .hero-copy h1 {
+            font-size: 2.6rem;
+            line-height: 1.05;
+            margin-bottom: 1rem;
+            color: var(--text-0)
+        }
+
+        .hero-copy p {
+            color: var(--muted);
+            max-width: 58ch;
+            margin-bottom: 1.5rem
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 12px;
+            align-items: center
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .6rem;
+            padding: .75rem 1.1rem;
+            border-radius: 12px;
+            font-weight: 700;
+            border: none;
+            text-decoration: none
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--primary-2), var(--primary));
+            color: #fff;
+            box-shadow: 0 8px 30px rgba(37, 99, 235, 0.15)
+        }
+
+        .btn-ghost {
+            background: transparent;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--text-0)
+        }
+
+        .hero-panel {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 18px;
+            backdrop-filter: blur(var(--glass-blur));
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.06)
+        }
+
+        .hero-panel h4 {
+            color: var(--primary);
+            margin-bottom: .5rem
+        }
+
+        .hero-panel p {
+            color: var(--muted);
+            font-size: .94rem
+        }
+
+        .section {
+            padding: 3.25rem 0
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text-0);
+            margin-bottom: 1.8rem
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.25rem
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1.6rem;
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            transition: transform .25s ease, box-shadow .25s ease
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15)
+        }
+
+        .card h3 {
+            color: var(--primary);
+            font-size: 1.05rem;
+            margin-bottom: .6rem
+        }
+
+        .card p {
+            color: var(--muted);
+            font-size: .95rem
+        }
+
+        .stream-section {
+            margin-bottom: 2.25rem
+        }
+
+        .stream-title {
+            text-align: center;
+            color: var(--text-0);
+            font-weight: 800;
+            margin-bottom: 1rem
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem
+        }
+
+        .options-grid .card {
+            padding: 1.4rem
+        }
+
+        .list {
+            list-style: none;
+            padding: 0
+        }
+
+        .list li {
+            padding: .6rem 0;
+            border-bottom: 1px dashed rgba(0, 0, 0, 0.08);
+            color: var(--muted);
+            position: relative;
+            padding-left: 1.8rem
+        }
+
+        .list li:before {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            top: 12px;
+            background: linear-gradient(180deg, var(--primary), var(--primary-2));
+            box-shadow: 0 6px 18px rgba(37, 99, 235, 0.2)
+        }
+
+        .note {
+            background: #fffbea;
+            padding: 10px;
+            border-radius: 10px;
+            color: #92400e;
+            font-weight: 600;
+            margin-top: 12px;
+            border: 1px solid #fde68a
+        }
+
+        .tips {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem
+        }
+
+        .tip-item {
+            padding: 1rem;
+            border-radius: 12px;
+            background: #ffffff;
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            color: var(--muted);
+            font-weight: 600
+        }
+
+        footer {
+            margin-top: 2.25rem;
+            text-align: center;
+            padding: 0rem;
+            color: var(--muted);
+            background: #f9fafb;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        @media(max-width:980px) {
+            .hero-inner {
+                grid-template-columns: 1fr
+            }
+
+            .options-grid {
+                grid-template-columns: 1fr
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .navbar {
+                padding: 10px
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn .8s ease-out both
+        }
+
+        .slide-up {
+            animation: slideUp .8s cubic-bezier(.2, .9, .2, 1) both
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(18px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .faq-section {
+            padding: 3rem 0;
+        }
+
+        .faq-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--text-0);
+        }
+
+        .faq {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq details {
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            margin-bottom: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
+            cursor: pointer;
+        }
+
+        .faq summary {
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            outline: none;
+        }
+
+        .faq p {
+            color: var(--muted);
+            margin-top: 0.6rem;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .reviews-section {
+            padding: 3.25rem 0;
+            overflow: hidden;
+        }
+
+        .reviews-title {
+            text-align: center;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--text-0);
+        }
+
+        .reviews-slider {
+            display: flex;
+            gap: 1.2rem;
+            animation: slideReviews 28s linear infinite;
+            width: max-content;
+        }
+
+        .review-card {
+            min-width: 280px;
+            max-width: 320px;
+            background: #ffffff;
+            border-radius: 14px;
+            padding: 1.4rem;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            box-shadow: var(--card-shadow);
+            flex-shrink: 0;
+        }
+
+        .review-card h4 {
+            color: var(--primary);
+            font-size: 1rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .review-card p {
+            color: var(--muted);
+            font-size: 0.92rem;
+            line-height: 1.4;
+        }
+
+        @keyframes slideReviews {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .theme-switch {
+            display: inline-flex;
+            align-items: center;
+            margin-left: auto;
+        }
+
+        .theme-toggle {
+            --toggle-bg: rgba(0, 0, 0, 0.08);
+            position: relative;
+            width: 52px;
+            height: 28px;
+            border-radius: 9999px;
+            background: var(--toggle-bg);
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            display: inline-flex;
+            align-items: center;
+            padding: 2px;
+            cursor: pointer;
+            transition: background-color .2s ease, border-color .2s ease;
+        }
+
+        .theme-toggle:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        .theme-toggle .knob {
+            width: 24px;
+            height: 24px;
+            border-radius: 9999px;
+            background: var(--primary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+            transform: translateX(0);
+            transition: transform .2s ease, background-color .2s ease;
+        }
+
+        #theme-toggle:checked+.theme-toggle {
+            --toggle-bg: rgba(37, 99, 235, 0.35);
+            border-color: rgba(37, 99, 235, 0.45);
+        }
+
+        #theme-toggle:checked+.theme-toggle .knob {
+            transform: translateX(24px);
+            background: #ffffff;
+        }
+
+        html:has(#theme-toggle:checked) {
+            --bg-900: #0b1120;
+            --bg-800: #0f172a;
+            --glass: rgba(255, 255, 255, 0.06);
+            --muted-glass: rgba(255, 255, 255, 0.04);
+            --primary: #2563eb;
+            --primary-2: #1d4ed8;
+            --accent: #ffa200;
+            --text-0: #e5e7eb;
+            --text-1: #cbd5e1;
+            --muted: #94a3b8;
+            --card-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        html:has(#theme-toggle:checked) body {
+            background: var(--bg-900);
+            color: var(--text-0);
+        }
+
+        html:has(#theme-toggle:checked) .navbar {
+            background: rgba(2, 6, 23, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+        }
+
+        html:has(#theme-toggle:checked) .logo,
+        html:has(#theme-toggle:checked) .section-title,
+        html:has(#theme-toggle:checked) .stream-title,
+        html:has(#theme-toggle:checked) .reviews-title,
+        html:has(#theme-toggle:checked) .faq-title {
+            color: var(--text-0);
+        }
+
+        html:has(#theme-toggle:checked) .nav-link {
+            color: var(--muted);
+        }
+
+        html:has(#theme-toggle:checked) .nav-link:hover {
+            color: var(--text-0);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        html:has(#theme-toggle:checked) .btn-ghost {
+            border: 1px solid rgba(255, 255, 255, 0.14);
+            color: var(--text-0);
+            background: transparent;
+        }
+
+        html:has(#theme-toggle:checked) .hero-panel,
+        html:has(#theme-toggle:checked) .card,
+        html:has(#theme-toggle:checked) .tip-item,
+        html:has(#theme-toggle:checked) .faq details,
+        html:has(#theme-toggle:checked) .review-card {
+            background: var(--bg-800);
+            border: 1px solid rgba(255, 255, 255, 0.10);
+            box-shadow: var(--card-shadow);
+        }
+
+        html:has(#theme-toggle:checked) .list li {
+            color: var(--muted);
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
+        }
+
+        html:has(#theme-toggle:checked) .note {
+            background: #1e293b;
+            color: #fde68a;
+            border: 1px solid #334155;
+        }
+
+        html:has(#theme-toggle:checked) footer {
+            background: #0f172a;
+            color: var(--muted);
+            border-top: 1px solid rgba(255, 255, 255, 0.10);
+        }
+
+        @media(max-width:980px) {
+            .theme-switch {
+                margin-left: 0;
+            }
+        }
+
+        .endpart {
+            background-color: #1e293b;
+        }
+    </style>
+</head>
+
+<body
+    onmousemove="this.style.setProperty('--x', event.clientX + 'px'); this.style.setProperty('--y', event.clientY + 'px')">
+    <nav class="navbar fade-in">
+        <div class="container nav-container">
+            <div class="logo">
+                <img src="graduation-cap-solid-full.jpg" alt="Logo" style="height: 31px; margin-right: 10px;" />
+                CareerGuide <span>.in</span>
+            </div>
+            <ul class="nav-links">
+                <li><a class="nav-link" href="#streams">Streams</a></li>
+                <li><a class="nav-link" href="#finder">Finder</a></li>
+                <li><a class="nav-link" href="#tips">Tips</a></li>
+                <li><a class="nav-link" href="#faq">FAQs</a></li>
+                <li><a class="nav-link" href="#reviews">reviews</a></li>
+            </ul>
+            <div class="theme-switch">
+                <input class="sr-only" type="checkbox" id="theme-toggle" />
+                <label class="theme-toggle" for="theme-toggle" role="switch" aria-label="Toggle dark mode"
+                    title="Toggle dark mode">
+                    <span class="knob" aria-hidden="true"></span>
+                </label>
+            </div>
+        </div>
+    </nav>
+    <header class="hero container">
+        <div class="hero-inner">
+            <div class="hero-copy">
+                <h2 class="fade-in">Class 12 ke baad kya karun?</h2>
+                <h1 class="slide-up">Discover the Right Path — Govt & Private Options</h1>
+                <p class="fade-in">Science, Commerce, ya Arts — stream choose karo, aur turant dekho career choices with
+                    government jobs list. Simple, clear & trusted guidance for your next step.</p>
+                <div class="hero-cta"> <a href="#finder" class="btn btn-primary">Start Exploring</a> <a href="#tips"
+                        class="btn btn-ghost">Quick Tips</a> </div>
+            </div>
+            <aside class="hero-panel fade-in" aria-hidden="true">
+                <h4>Fast Lookup</h4>
+                <p>Choose your stream to view curated government & professional tracks — built for clarity. </p>
+            </aside>
+        </div>
+    </header>
+    <main class="container"></main>
+    <footer>
+        <div class="container">
+            <section id="streams" class="section">
+                <h2 class="section-title">Streams Overview</h2>
+                <div class="grid">
+                    <article class="card slide-up">
+                        <h3>Science</h3>
+                        <p>Engineering, Medicine, Research, IT, Architecture, Defence.</p>
+                    </article>
+                    <article class="card slide-up">
+                        <h3>Commerce</h3>
+                        <p>CA, CS, BBA/MBA, Economics, Banking, Finance, Management.</p>
+                    </article>
+                    <article class="card slide-up">
+                        <h3>Arts / Humanities</h3>
+                        <p>Law, Journalism, Civil Services, Hotel Management, Psychology, Arts.</p>
+                    </article>
+                </div>
+            </section>
+            <section id="finder" class="section">
+                <h2 class="section-title">Career Options by Stream</h2>
+                <div class="stream-section">
+                    <h3 class="stream-title">Science Stream</h3>
+                    <div class="options-grid">
+                        <div class="card">
+                            <h4>Private / Professional Courses</h4>
+                            <ul class="list">
+                                <li>Engineering (B.Tech / B.E)</li>
+                                <li>Medical (MBBS, BDS, Nursing, Pharmacy)</li>
+                                <li>B.Sc (Physics, Chemistry, Maths, Biology)</li>
+                                <li>Computer Science & IT (BCA, B.Sc CS)</li>
+                                <li>Architecture (B.Arch)</li>
+                                <li>Defence-related Tech (Aerospace, Naval, Avionics)</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Government Jobs (after Class 12 or Graduation track)</h4>
+                            <ul class="list">
+                                <li>Defence: NDA (Army, Navy, Air Force) — 12th ke baad entry</li>
+                                <li>Paramilitary / CAPF constable & technical roles — 12th ke baad</li>
+                                <li>Indian Railways: Group C/D technical & clerk roles (as per notification)</li>
+                                <li>SSC (CHSL) — 12th ke baad LDC/DEO/PA/SA</li>
+                                <li>State Police: Constable / Technical support roles (as per state)</li>
+                                <li>ISRO/DRDO Technician & Assistant (notifications + eligibility vary)</li>
+                                <li>Graduation ke baad: SSC CGL, State PSC, Banking (IBPS/PO/Clerk)</li>
+                            </ul>
+                            <p class="note">Note: Kuch exams 12th ke turant baad, aur kuch graduation ke baad hoti hain
+                                — eligibility details check karna zaroori hai.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stream-section">
+                    <h3 class="stream-title">Commerce Stream</h3>
+                    <div class="options-grid">
+                        <div class="card">
+                            <h4>Private / Professional Courses</h4>
+                            <ul class="list">
+                                <li>B.Com / B.Com (Hons)</li>
+                                <li>Chartered Accountant (CA)</li>
+                                <li>Company Secretary (CS)</li>
+                                <li>BBA / Integrated MBA</li>
+                                <li>Economics (BA / B.Sc Economics)</li>
+                                <li>Banking & Finance, FinTech</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Government Jobs (after Class 12 or Graduation track)</h4>
+                            <ul class="list">
+                                <li>Banking: Clerk (12th-level in some recruitments) / PO (graduation)</li>
+                                <li>Income Tax / GST assistant roles (through SSC exams)</li>
+                                <li>SSC (CHSL) — LDC/DEO/PA/SA (12th ke baad)</li>
+                                <li>Indian Railways: Clerk/Accounts assistant (as per notification)</li>
+                                <li>State Revenue / Secretariat clerical posts</li>
+                                <li>Graduation ke baad: SSC CGL, RBI Assistant, UPSC/State PSC</li>
+                            </ul>
+                            <p class="note">Note: Kuch exams 12th ke turant baad, aur kuch graduation ke baad hoti hain
+                                — eligibility details check karna zaroori hai.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stream-section">
+                    <h3 class="stream-title">Arts / Humanities Stream</h3>
+                    <div class="options-grid">
+                        <div class="card">
+                            <h4>Private / Professional Courses</h4>
+                            <ul class="list">
+                                <li>BA (History, Political Science, Psychology, Sociology)</li>
+                                <li>Journalism & Mass Communication</li>
+                                <li>Hotel Management & Tourism</li>
+                                <li>Fine Arts / Performing Arts</li>
+                                <li>Law (BA LLB)</li>
+                                <li>Civil Services track (foundation + degree)</li>
+                            </ul>
+                        </div>
+                        <div class="card">
+                            <h4>Government Jobs (after Class 12 or Graduation track)</h4>
+                            <ul class="list">
+                                <li>SSC (CHSL) — LDC/DEO/PA/SA (12th ke baad)</li>
+                                <li>State Police: Constable / Jail Warder / Home Guard</li>
+                                <li>Indian Railways: Group D & clerical roles (as per notification)</li>
+                                <li>Defence: Army Agniveer GD / Clerk</li>
+                                <li>Post Office (Postal Assistant/Sorting Assistant via SSC)</li>
+                                <li>Graduation ke baad: UPSC Civil Services, SSC CGL, State PSC</li>
+                            </ul>
+                            <p class="note">Note: Kuch exams 12th ke turant baad, aur kuch graduation ke baad hoti hain
+                                — eligibility details check karna zaroori hai.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="tips" class="section">
+                <h2 class="section-title">Smart Tips</h2>
+                <div class="tips">
+                    <div class="tip-item">Apni strength/interest pe focus karo, marks pe nahi.</div>
+                    <div class="tip-item">Short internships, online courses ya workshops try karo.</div>
+                    <div class="tip-item">Mentors/seniors se baat karke clarity lo.</div>
+                    <div class="tip-item">Always keep a backup plan (Plan B).</div>
+                </div>
+            </section>
+            <section id="faq" class="faq-section">
+                <h2 class="faq-title">FAQs — Class 12 ke baad kya?</h2>
+                <div class="faq">
+                    <details>
+                        <summary>12th ke turant baad best government jobs kaun si hoti hain?</summary>
+                        <p>NDA, SSC CHSL, Railway Group D/C, aur State Police Constable sabse popular options hain jo
+                            directly 12th ke baad available hote hain.</p>
+                    </details>
+                    <details>
+                        <summary>Agar graduation karu to kya options badh jaate hain?</summary>
+                        <p>Haan, graduation ke baad SSC CGL, Banking (PO/Clerk), UPSC Civil Services, aur State PSC
+                            exams khul jaate hain.</p>
+                    </details>
+                    <details>
+                        <summary>Private courses better hain ya government exams?</summary>
+                        <p>Ye depend karta hai tumhari interest aur stability preference pe — government exams stable
+                            jobs deti hain, jabki private/professional courses career growth aur variety provide karte
+                            hain.</p>
+                    </details>
+                    <details>
+                        <summary>Science, Commerce aur Arts me se kiska scope zyada hai?</summary>
+                        <p>Tino streams ka apna unique scope hai — Science me technical fields, Commerce me finance &
+                            business, aur Arts me civil services & creative fields ka strong scope hota hai.</p>
+                    </details>
+                    <details>
+                        <summary>Fail hone ke baad kya options bache rehte hain?</summary>
+                        <p>Reappear karke boards clear karna ek option hai, lekin vocational courses, skill diplomas aur
+                            government ITI bhi ek alternative career path provide karte hain.</p>
+                    </details>
+                </div>
+            </section>
+            <section id="reviews" class="reviews-section">
+                <h2 class="reviews-title">Student Reviews</h2>
+                <div class="reviews-slider">
+                    <div class="review-card">
+                        <h4>Riya, Class 12 Science</h4>
+                        <p>"CareerGuide.in ne mujhe NDA aur B.Tech ke options clear karne me help ki. Ab future ke liye
+                            clear roadmap hai!"</p>
+                    </div>
+                    <div class="review-card">
+                        <h4>Arjun, Class 12 Commerce</h4>
+                        <p>"Pehle confusion tha CA aur BBA ke beech, yaha pe comparative guidance mil gaya. Bahut
+                            useful!"</p>
+                    </div>
+                    <div class="review-card">
+                        <h4>Meena, Class 12 Arts</h4>
+                        <p>"Mujhe Civil Services ka interest tha, aur iss site ne mujhe proper foundation track dikhaya.
+                            Thanks!" </p>
+                    </div>
+                    <div class="review-card">
+                        <h4>Karan, Class 12 PCM</h4>
+                        <p>"Engineering ya Defence? Dono ke liye path clear ho gaya aur govt jobs ke options bhi samajh
+                            aaye."</p>
+                    </div>
+                    <div class="review-card">
+                        <h4>Simran, Class 12 PCB</h4>
+                        <p>"Medical vs Pharmacy decision tough tha, lekin yaha ke guidance se clarity mil gayi."</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </footer>
+    <footer>
+        <div class="endpart">
+            <p style="color: white;">©️ 2025 CareerGuide.in • Blockbusters</p>
+            <p style="color:white;">Made with ❤️ to help students build a brighter future.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
