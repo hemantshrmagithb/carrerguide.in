@@ -24,7 +24,7 @@
 
 *(Adjust these if you used different tools for this specific build)*
 
-* **Frontend:** HTML5, CSS3 , JS
+* **Frontend:** HTML5, CSS3 ,JS
 * **Deployment & Hosting:** [Netlify](https://www.netlify.com/)
 
 ---
